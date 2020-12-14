@@ -43,32 +43,32 @@ public:
     }
 };
 
-template <class Type> Vector<Type>::Vector(int s, int si) {
+template <class T> Vector<T>::Vector(int s, int si) {
     Size = s;
     StartIndex = si;
-    pVec = new Type[Size];
+    pVec = new T[Size];
     for (int i = 0; i < Size; i++)
         pVec[i] = 0;
 }
 
-template <class Type> Vector<Type>::Vector(const Vector &v) {
+template <class T> Vector<T>::Vector(const Vector &v) {
     Size = v.Size;
     StartIndex = v.StartIndex;
-    pVec = new Type[Size];
+    pVec = new T[Size];
     for (int i = 0; i < Size; i++)
         pVec[i] = v.pVec[i];
 }
 
-template <class Type> Type &Vector<Type>::GetValue(int pos) {
+template <class T> T &Vector<T>::GetValue(int pos) {
     return pVec[pos - StartIndex];
 
 }
 
-template <class Type> Type &Vector<Type>::operator[](int pos) {
+template <class T> T &Vector<T>::operator[](int pos) {
     return pVec[pos - StartIndex];
 }
 
-template <class Type> bool Vector<Type>::operator==(Vector const &v) {
+template <class T> bool Vector<T>::operator==(Vector const &v) {
     if (Size != v.Size || StartIndex != v.StartIndex)
         return false;
     for (int i = 0; i < v.Size; i++) {
@@ -78,7 +78,7 @@ template <class Type> bool Vector<Type>::operator==(Vector const &v) {
     return true;
 }
 
-template <class Type> bool Vector<Type>::operator!=(Vector const &v) {
+template <class T> bool Vector<T>::operator!=(Vector const &v) {
     if (Size != v.Size || StartIndex != v.StartIndex)
         return true;
     for (int i = 0; i < v.Size; i++) {
@@ -88,11 +88,11 @@ template <class Type> bool Vector<Type>::operator!=(Vector const &v) {
     return false;
 }
 
-template <class Type> Vector<Type> &Vector<Type>::operator=(const Vector &v) {
+template <class T> Vector<T> &Vector<T>::operator=(const Vector &v) {
     if (this != &v) {
         if (Size != v.Size) {
             delete[] pVec;
-            pVec = new Type[v.Size];
+            pVec = new T[v.Size];
         }
         Size = v.Size;
         StartIndex = v.StartIndex;
@@ -103,45 +103,45 @@ template <class Type> Vector<Type> &Vector<Type>::operator=(const Vector &v) {
     return *this;
 }
 
-template <class Type> Vector<Type> Vector<Type>::operator+(Type const &val) {
-    Vector<Type> tmp(*this);
+template <class T> Vector<T> Vector<T>::operator+(T const &val) {
+    Vector<T> tmp(*this);
     for (int i = 0; i < this->Size; i++)
         tmp.pVec[i] += val;
     return tmp;
 }
 
-template <class Type> Vector<Type> Vector<Type>::operator-(Type const &val) {
-    Vector<Type> tmp(*this);
+template <class T> Vector<T> Vector<T>::operator-(T const &val) {
+    Vector<T> tmp(*this);
     for (int i = 0; i < this->Size; i++)
         tmp.pVec[i] -= val;
     return tmp;
 }
 
-template <class Type> Vector<Type> Vector<Type>::operator*(const Type &val) {
-    Vector<Type> tmp(*this);
+template <class T> Vector<T> Vector<T>::operator*(const T &val) {
+    Vector<T> tmp(*this);
     for (int i = 0; i < this->Size; i++)
         tmp.pVec[i] *= val;
     return tmp;
 }
 
-template <class Type> Vector<Type> Vector<Type>::operator+(const Vector &v) {
-    Vector<Type> tmp(*this);
+template <class T> Vector<T> Vector<T>::operator+(const Vector &v) {
+    Vector<T> tmp(*this);
     if (v.Size != tmp.Size || v.StartIndex != tmp.StartIndex) throw std::length_error("Vectors' sizes must be equal");
     for (int i = 0; i < tmp.Size; i++)
         tmp.pVec[i] = tmp.pVec[i] + v.pVec[i];
     return tmp;
 }
 
-template <class Type> Vector<Type> Vector<Type>::operator-(const Vector &v) {
-    Vector<Type> tmp(*this);
+template <class T> Vector<T> Vector<T>::operator-(const Vector &v) {
+    Vector<T> tmp(*this);
     if (v.Size != tmp.Size || v.StartIndex != tmp.StartIndex) throw std::length_error("Vectors' sizes must be equal");
     for (int i = 0; i < tmp.Size; i++)
         tmp.pVec[i] = tmp.pVec[i] - v.pVec[i];
     return tmp;
 }
 
-template <class Type> Type Vector<Type>::operator*(const Vector &v) {
-    Type tmp = 0;
+template <class T> T Vector<T>::operator*(const Vector &v) {
+    T tmp = 0;
     if (v.Size != Size || v.StartIndex != StartIndex) throw std::length_error("Vectors' sizes must be equal");
     for (int i = 0; i < Size; i++)
         tmp = tmp + (this->pVec[i] * v.pVec[i]);
