@@ -18,6 +18,7 @@ public:
     Matrix operator+(const Matrix &mt);
     Matrix operator-(const Matrix &mt);
     Matrix operator*(const Matrix &mt);
+    Matrix operator*(const T &val);
     friend std::istream &operator>>(std::istream &in, Matrix &mt) {
         for (int i = 0; i < mt.Size; i++)
             in >> mt.pVec[i];
@@ -86,13 +87,21 @@ template <class T> Matrix<T> Matrix<T>::operator-(const Matrix &mt) {
 template <class T> Matrix<T> Matrix<T>::operator*(const Matrix &mt) {
     Matrix<T> tmp(this->Size);
     for (int i = 0; i < this->Size; i++)
-        for (int j = 0; j < this->Size / 2; j++) { // size/2
+        for (int j = 0; j < this->Size; j++) {
             T tp = T();
             for (int k = i; k <= j; ++k) {
                 tp = tp + (this->pVec[i][k] * mt.pVec[k][j]);
             }
             tmp.pVec[i][j] = tp;
         }
+    return tmp;
+}
+
+template <class T> Matrix<T> Matrix<T>::operator*(const T &val) {
+    Matrix<T> tmp(this->Size);
+    for (int i = 0; i < this->Size; i++) {
+        tmp.pVec[i] = this->pVec[i] * 2;
+    }
     return tmp;
 }
 

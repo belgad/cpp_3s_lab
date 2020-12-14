@@ -141,12 +141,11 @@ template <class T> Vector<T> Vector<T>::operator-(const Vector &v) {
 }
 
 template <class T> T Vector<T>::operator*(const Vector &v) {
-    T tmp = 0;
+    T tmp = T();
     if (v.Size != Size || v.StartIndex != StartIndex) throw std::length_error("Vectors' sizes must be equal");
     for (int i = 0; i < Size; i++)
         tmp = tmp + (this->pVec[i] * v.pVec[i]);
     return tmp;
 }
-
 
 #endif //CPP_3S_LAB_VECTOR_HPP
