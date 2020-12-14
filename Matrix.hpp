@@ -30,25 +30,25 @@ public:
     }
 };
 
-template <class T> Matrix<T>::Matrix(int s) : Vector<Vector<T>>(s) {
+template <class Type> Matrix<Type>::Matrix(int s) : Vector<Vector < Type>>(s) {
     for (int i = 0; i < s; i++)
-        this->pVec[i] = Vector<T>(s - i, i);
+        this->pVec[i] = Vector<Type>(s - i, i);
 }
 
-template <class T> Matrix<T>::Matrix(const Matrix<T> &mt) : Vector<Vector<T>>(mt) {}
+template <class Type> Matrix<Type>::Matrix(const Matrix<Type> &mt) : Vector<Vector < Type>>(mt) {}
 
-template <class T> Matrix<T>::Matrix(const Vector<Vector<T>> &mt) : Vector<Vector<T>>(mt) {
+template <class Type> Matrix<Type>::Matrix(const Vector<Vector<Type> > &mt) : Vector<Vector < Type>>(mt) {
     for (int i = 0; i < this->GetSize(); i++) {
         if (this->pVec[i].GetSize() != this->GetSize() - i)
             throw std::out_of_range("This is not a triangle matrix");
     }
 }
 
-template <class T> Matrix<T> &Matrix<T>::operator=(const Matrix &mt) {
+template <class Type> Matrix<Type> &Matrix<Type>::operator=(const Matrix &mt) {
     if (this != &mt) {
         if (this->Size != mt.Size) {
             delete[] this->pVec;
-            this->pVec = new Vector<T>[mt.Size];
+            this->pVec = new Vector<Type>[mt.Size];
         }
         this->Size = mt.Size;
         this->StartIndex = mt.StartIndex;
@@ -59,7 +59,7 @@ template <class T> Matrix<T> &Matrix<T>::operator=(const Matrix &mt) {
     return *this;
 }
 
-template <class T> bool Matrix<T>::operator==(Matrix const &mt) {
+template <class Type> bool Matrix<Type>::operator==(Matrix const &mt) {
     if (this->Size != mt.Size || this->StartIndex != mt.StartIndex)
         return false;
     for (int i = 0; i < mt.Size; i++) {
@@ -69,25 +69,25 @@ template <class T> bool Matrix<T>::operator==(Matrix const &mt) {
     return true;
 }
 
-template <class T> Matrix<T> Matrix<T>::operator+(const Matrix &mt) {
+template <class Type> Matrix<Type> Matrix<Type>::operator+(const Matrix &mt) {
     Matrix tmp(*this);
     for (int i = 0; i < tmp.Size; i++)
         tmp.pVec[i] = tmp.pVec[i] + mt.pVec[i];
     return tmp;
 }
 
-template <class T> Matrix<T> Matrix<T>::operator-(const Matrix &mt) {
+template <class Type> Matrix<Type> Matrix<Type>::operator-(const Matrix &mt) {
     Matrix tmp(*this);
     for (int i = 0; i < tmp.Size; i++)
         tmp.pVec[i] = tmp.pVec[i] - mt.pVec[i];
     return tmp;
 }
 
-template <class T> Matrix<T> Matrix<T>::operator*(const Matrix &mt) {
-    Matrix<T> tmp(this->Size);
+template <class Type> Matrix<Type> Matrix<Type>::operator*(const Matrix &mt) {
+    Matrix<Type> tmp(this->Size);
     for (int i = 0; i < this->Size; i++)
         for (int j = 0; j < this->Size / 2; j++) { // size/2
-            T tp = T();
+            Type tp = Type();
             for (int k = i; k <= j; ++k) {
                 tp = tp + (this->pVec[i][k] * mt.pVec[k][j]);
             }
