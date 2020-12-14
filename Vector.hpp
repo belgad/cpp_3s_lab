@@ -2,10 +2,8 @@
 // Created by glebd on 14.12.2020.
 //
 
-#include "magic.h"
-
-#ifndef CPP_3S_LAB_VECTOR_H
-#define CPP_3S_LAB_VECTOR_H
+#ifndef CPP_3S_LAB_VECTOR_HPP
+#define CPP_3S_LAB_VECTOR_HPP
 
 #include <iostream>
 
@@ -40,6 +38,7 @@ public:
     friend std::ostream &operator<<(std::ostream &out, Vector &v) {
         for (int i = 0; i < v.Size; i++)
             out << v.pVec[i] << " ";
+        out << std::endl;
         return out;
     }
 };
@@ -150,4 +149,4 @@ template <class Type> Type Vector<Type>::operator*(const Vector &v) {
 }
 
 
-#endif //CPP_3S_LAB_VECTOR_H
+#endif //CPP_3S_LAB_VECTOR_HPP
