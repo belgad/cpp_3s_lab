@@ -4,6 +4,6 @@
 
 * **main.cpp** - test function file 
 * **magic.hpp** - magic `#include` file 
-* **CMakeLists.txt** -- CMake project configuration 
+* **CMakeLists.txt** - CMake project configuration 
 * **Vector.cpp, Vector.hpp** - Vector class implementation 
 * **Matrix.cpp, Matrix.hpp** - Matrix class implementation 
